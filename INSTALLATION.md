@@ -8,6 +8,34 @@
 
 ---
 
+## ⚠️ **NOTA: Corrección de Error Conocido en hooks.yaml**
+
+El archivo `hooks.yaml` tenía un error de duplicación de la declaración `hooks:` que causaba que el plugin `opencode-yaml-hooks` fallara.
+
+### Solución Aplicada:
+- Se eliminó la primera declaración duplicada de `hooks:` en el archivo
+- El YAML ahora es válido y parseable correctamente
+- Todos los 17 hooks funcionan como esperado
+
+### Cómo Reparar Si Aún Tienes el Error:
+
+```bash
+# En proyectos nuevos desde el template:
+cp ripers5-template/.opencode/hooks/hooks.yaml tu-proyecto/.opencode/hooks/hooks.yaml
+
+# O usar el script de instalación
+./install-riper5.sh tu-proyecto
+```
+
+### Verificación Después de la Corrección:
+
+```bash
+python3 -c "import yaml; yaml.safe_load(open('.opencode/hooks/hooks.yaml'))"
+# Debe mostrar: ✅ YAML válido!
+```
+
+---
+
 ## 📦 Contenido del Template
 
 ### **Archivos Principales (25 archivos totales)**
