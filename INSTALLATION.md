@@ -2,9 +2,7 @@
 
 ## ✅ Estado del Repostorio
 
-**Versión:** 1.0.0  
-**Estado:** Completamente listo para subir a GitHub  
-**Ubicación:** `/home/luchito/proyecto/project_test/ripers5-template/`
+**Versión:** 1.0.1  
 
 ---
 
@@ -16,25 +14,6 @@ El archivo `hooks.yaml` tenía un error de duplicación de la declaración `hook
 - Se eliminó la primera declaración duplicada de `hooks:` en el archivo
 - El YAML ahora es válido y parseable correctamente
 - Todos los 17 hooks funcionan como esperado
-
-### Cómo Reparar Si Aún Tienes el Error:
-
-```bash
-# En proyectos nuevos desde el template:
-cp ripers5-template/.opencode/hooks/hooks.yaml tu-proyecto/.opencode/hooks/hooks.yaml
-
-# O usar el script de instalación
-./install-riper5.sh tu-proyecto
-```
-
-### Verificación Después de la Corrección:
-
-```bash
-python3 -c "import yaml; yaml.safe_load(open('.opencode/hooks/hooks.yaml'))"
-# Debe mostrar: ✅ YAML válido!
-```
-
----
 
 ## 📦 Contenido del Template
 
@@ -52,38 +31,13 @@ python3 -c "import yaml; yaml.safe_load(open('.opencode/hooks/hooks.yaml'))"
 
 ---
 
-## 🚀 Cómo Publicar en GitHub
 
-### Método 1: Desde la Interfaz Web (Recomendado)
-
-1. Ve a https://github.com/new
-2. Haz clic en **"Use this template"** → **"Create a new repository from this template"**
-3. Crea repositorio con:
-   - Nombre: `riper5-template`
-   - Descripción: "OpenCode project template with RIPER-5 workflow"
-   - Licencia: MIT
-
-### Método 2: Desde CLI (para subir commits)
-
-```bash
-cd /home/luchito/proyecto/project_test/ripers5-template
-
-# Configurar remote
-git remote add origin https://github.com/TU-USER/riper5-template.git
-
-# Crear y empujar tags
-git branch -M main
-git push -u origin main --tags
-```
-
----
-
-## 🎯 Cómo Usar Después de Publicar
+## 🎯 Cómo Usar 
 
 ### Para nuevos proyectos:
 
 ```bash
-git clone <TU_REPO_GITHUB> nuevo-proyecto/
+git clone (https://github.com/llamazaresfp-dev/opencode-riper-5) nuevo-proyecto/
 cd nuevo-proyecto
 opencode
 # Workflow RIPER-5 ya configurado!
@@ -180,38 +134,6 @@ El archivo `.opencode/permissions.json` controla:
 
 ---
 
-## 🔄 Actualizar Template (Futuras Versiones)
-
-Para actualizar a nuevas versiones:
-
-```bash
-# Crear carpeta de release
-mkdir ripers5-template/.github/releases
-
-# Documentar cambios
-echo "# v1.1.0" > ripers5-template/changelog.md
-
-# Commit y push
-git add .
-git commit -m "Update to v1.1.0 with new features"
-git push origin main --tags
-```
-
----
-
-## ✅ Checklist Final Antes de Publicar
-
-- [ ] Todos los agents existan en `.opencode/agents/`
-- [ ] Los 9 hooks scripts estén en `.claude/hooks/`
-- [ ] `hooks.yaml` esté configurado en `.opencode/hooks/`
-- [ ] `permissions.json` con whitelist
-- [ ] Estructura `process/general-plans/active` y `features/` creada
-- [ ] Scripts `install-riper5.sh` y `verify-riper5.sh` funcionen
-- [ ] README.md documentado completamente
-
----
-
-**Versión:** 1.0.0  
+**Versión:** 1.0.1
 **Última actualización:** Noviembre 2026  
 **Estado:** ✅ Listo para publicar en GitHub
-
