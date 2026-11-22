@@ -1,0 +1,25 @@
+{
+  "name": "riper5-opencode-template",
+  "version": "1.0.0",
+  "description": "Plantilla de proyecto para OpenCode con workflow RIPER-5",
+  "type": "module",
+  "scripts": {
+    "init": "echo '✅ Plantilla lista - Abre con opencode'",
+    "lint": "echo 'Lint no configurado por defecto' || true",
+    "test": "echo 'Tests para configurar según necesidad' || true",
+    "prepare": "husky install"
+  },
+  "keywords": [
+    "opencode",
+    "riper-5",
+    "workflow",
+    "template",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0"
+  }
+}

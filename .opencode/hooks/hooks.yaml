@@ -1,0 +1,57 @@
+# Configuration file for OpenCode hooks (OpenCode V2 format)
+# Hooks are referenced here, but scripts live in .claude/hooks/
+
+hooks:
+  # --- 1. INICIALIZACIÓN DE SESIÓN ---
+
+  - event: session.created
+    scope: main
+    actions:
+      - bash: 'node "$OPENCODE_PROJECT_DIR/.claude/hooks/session-init.cjs"'
+
+  # --- 2. BLOQUEO SCOUT (Seguridad) ---
+
+  - event: tool.before.bash
+    actions:
+      - bash: |
+          # Leer de stdin para saber si el hook debe activarse
+          payload=$(cat)
+          command=$(printf '%s' "$payload" | jq -r '.command // empty')
+          
+          # Intentar leer whitelist desde permissions.json
+          if [ -f "$OPENCODE_PROJECT_DIR/.opencode/permissions.json" ]; then
+            OPENCODE_PROJECT_DIR="$OPENCODE_PROJECT_DIR" \
+              node "$OPENCODE_PROJECT_DIR/.claude/hooks/scout-block.cjs" <<< "$payload" 2>/dev/null || true
+          else
+            # Si no hay whitelist, permitir exploración limitada por defecto
+            echo "🔍 OpenCode hooks: Allow (no whitelist config found)" >&2
+            exit 0
+          fi
+
+  - event: tool.before.glob
+    actions:
+      - bash: |
+          payload=$(cat)
+          
+          if [ -f "$OPENCODE_PROJECT_DIR/.opencode/permissions.json" ]; then
+            OPENCODE_PROJECT_DIR="$OPENCODE_PROJECT_DIR" \
+              node "$OPENCODE_PROJECT_DIR/.claude/hooks/scout-block.cjs" <<< "{\"command\":\"glob:$(printf '%s' "$payload" | jq -r '.pattern // empty')\"}" 2>/dev/null || true
+          fi
+
+  # --- 3. PRIVACIDAD Y SEGURIDAD ---
+
+  - event: tool.after.bash
+    actions:
+      - bash: |
+          payload=$(cat)
+          
+          if [ -f "$OPENCODE_PROJECT_DIR/.claude/hooks/privacy-block.cjs" ]; then
+            echo "$payload" | node "$OPENCODE_PROJECT_DIR/.claude/hooks/privacy-block.cjs" 2>/dev/null || true
+          fi
+
+  # --- 4. GESTIÓN DE ESTADO DE SESIÓN ---
+
+  - event: session.state.changed
+    actions:
+      - bash: 'node "$OPENCODE_PROJECT_DIR/.claude/hooks/session-state.cjs"'
+

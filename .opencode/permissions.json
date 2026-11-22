@@ -1,0 +1,24 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "allow_scout": true,
+  "scout_allowed_commands": [
+    "git status",
+    "git diff",
+    "git log -1",
+    "ls -la .claude/",
+    "find . -name 'package.json' -maxdepth 2",
+    "grep -r 'TODO' --include='*.ts' --include='*.tsx'"
+  ],
+  "read_whitelist": [
+    "*.md",
+    "*.jsonc",
+    "*.txt",
+    ".gitignore",
+    "README.md"
+  ],
+  "blocked_commands": [
+    "rm -rf .",
+    "curl http://",
+    "wget http://"
+  ]
+}
