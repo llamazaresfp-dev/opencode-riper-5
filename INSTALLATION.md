@@ -37,7 +37,7 @@ El archivo `hooks.yaml` tenía un error de duplicación de la declaración `hook
 ### Para nuevos proyectos:
 
 ```bash
-git clone (https://github.com/llamazaresfp-dev/opencode-riper-5) nuevo-proyecto/
+git clone https://github.com/llamazaresfp-dev/opencode-riper-5 nuevo-proyecto/
 cd nuevo-proyecto
 opencode
 # Workflow RIPER-5 ya configurado!
